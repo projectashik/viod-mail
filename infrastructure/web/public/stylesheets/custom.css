@@ -1,0 +1,45 @@
+body {
+    padding: 50px 50px 10px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+main {
+    flex: 1; /* keep footer at the bottom */
+}
+a {
+    /*color: #00B7FF;*/
+}
+
+a.no-link-color {
+    color: black;
+}
+
+.email:hover {
+    color: black;
+    background-color: #eeeeee;
+}
+
+
+iframe {
+    width: 100%;
+    height: 50vh;
+    margin-bottom: 3%;
+    border: 1px dotted black;
+}
+
+blockquote {
+    border-left: .3rem solid #9b4dca;
+}
+
+blockquote.warning {
+    border-left: .3rem solid #ca5414;
+}
+
+text-muted {
+    color: gray;
+}
+
+.footer {
+    text-align: center
+}

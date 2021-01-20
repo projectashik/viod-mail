@@ -1,0 +1,101 @@
+{% extends 'layout.twig' %} {% block body %}
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        enableNewMessageNotifications("{{ address }}", true);
+    });
+</script>
+<header class="text-center">
+    <span class="text-5xl text-center mb-5 text-gray-200">Mail Box</span>
+</header>
+<section id="mail" class="my-10 md:w-2/3 mx-auto flex">
+    <div class="shadow flex justify-between flex-1 mr-5 items-center">
+        <input
+            class="w-full py-3 pl-3 text-gray-300 bg-gray-600 rounded-l focus:outline-none"
+            value="{{ address }}"
+            id="email"
+            disabled
+        />
+        <button
+            id="copyToClipBoard"
+            class="bg-gray-900 py-3 px-3 rounded-r focus:outline-none"
+            title="Copy to clipboard"
+        >
+            <svg
+                width="22"
+                height="24"
+                viewBox="0 0 22 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                class="fill-current text-gray-400"
+            >
+                <path
+                    d="M15.7143 21V22.875C15.7143 23.4963 15.1866 24 14.5357 24H1.17857C0.527656 24 0 23.4963 0 22.875V5.625C0 5.00367 0.527656 4.5 1.17857 4.5H4.71429V18.375C4.71429 19.8225 5.94791 21 7.46429 21H15.7143ZM15.7143 4.875V0H7.46429C6.81337 0 6.28571 0.503672 6.28571 1.125V18.375C6.28571 18.9963 6.81337 19.5 7.46429 19.5H20.8214C21.4723 19.5 22 18.9963 22 18.375V6H16.8929C16.2446 6 15.7143 5.49375 15.7143 4.875ZM21.6548 3.42052L18.4166 0.329484C18.1956 0.11852 17.8958 1.55998e-06 17.5833 0L17.2857 0V4.5H22V4.21598C22 3.91763 21.8758 3.63149 21.6548 3.42052V3.42052Z"
+                    fill="currentColor"
+                />
+            </svg>
+        </button>
+    </div>
+    <a href="/login" class="flex bg-gray-600 rounded">
+        <span class="text-gray-300 py-3 px-3"> Logout </span>
+        <span class="bg-gray-900 py-3 px-3 rounded-r">
+            <svg
+                width="21"
+                height="19"
+                viewBox="0 0 21 19"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                class="fill-current text-gray-400"
+            >
+                <path
+                    d="M21.3555 9.79787L14.1367 17.6729C13.4922 18.376 12.375 17.8838 12.375 16.876V12.376H6.53125C5.95977 12.376 5.5 11.8744 5.5 11.251V6.751C5.5 6.12756 5.95977 5.626 6.53125 5.626H12.375V1.126C12.375 0.122872 13.4879 -0.374003 14.1367 0.329122L21.3555 8.20412C21.7551 8.64475 21.7551 9.35725 21.3555 9.79787ZM8.25 17.4385V15.5635C8.25 15.2541 8.01797 15.001 7.73438 15.001H4.125C3.36445 15.001 2.75 14.3307 2.75 13.501V4.501C2.75 3.67131 3.36445 3.001 4.125 3.001H7.73438C8.01797 3.001 8.25 2.74787 8.25 2.4385V0.563497C8.25 0.254122 8.01797 0.000996965 7.73438 0.000996965H4.125C1.84766 0.000996965 0 2.01662 0 4.501V13.501C0 15.9854 1.84766 18.001 4.125 18.001H7.73438C8.01797 18.001 8.25 17.7479 8.25 17.4385Z"
+                    fill="currentColor"
+                />
+            </svg>
+        </span>
+    </a>
+</section>
+<main class="md:w-2/3 mx-auto">
+    {% for mail in mailSummaries %}
+    <a
+        href="{{ mail.to[0] }}/{{ mail.uid }}"
+        class="bg-gray-700 mb-3 flex justify-between items-center px-5 py-5 rounded"
+    >
+        <p class="flex flex-col">
+            <span class="text-gray-200 text-2xl mb-2">{{ mail.subject }}</span>
+            <span class="text-gray-400"
+                >{{ mail.from[0].name }} {{ mail.from[0].address }}</span
+            >
+        </p>
+        <p class="text-gray-400">{{ mail.date | date }}</p>
+    </a>
+    {% endfor %} {% if not mailSummaries %}
+    <blockquote class="bg-gray-700 mb-3 px-5 py-5 rounded text-gray-400">
+        There are no mails yet.
+    </blockquote>
+    {% endif %}
+</main>
+<script>
+    const copyButton = document.getElementById("copyToClipBoard");
+    copyButton.addEventListener("click", () => {
+        myFunction();
+    });
+    function myFunction() {
+        /* Get the text field */
+        var copyText = document.getElementById("email");
+
+        var newInputField = document.createElement("input");
+        newInputField.setAttribute("value", copyText.value);
+        document.body.appendChild(newInputField);
+        /* Select the text field */
+        newInputField.select();
+        newInputField.setSelectionRange(0, 99999); /* For mobile devices */
+
+        /* Copy the text inside the text field */
+        document.execCommand("copy");
+        document.body.removeChild(newInputField);
+        /* Alert the copied text */
+        alert("Copied the email: " + newInputField.value);
+    }
+</script>
+
+{% endblock %}

@@ -1,0 +1,74 @@
+{% extends 'layout.twig' %} {% block body %}
+<script>
+    enableNewMessageNotifications("{{ address }}", false);
+</script>
+<div class="md:w-2/3 mx-auto">
+    <header class="flex justify-between">
+        <a href="/{{ address }}" class="flex flex-row">
+            <span class="bg-gray-900 p-3 rounded-l">
+                <svg
+                    width="22"
+                    height="24"
+                    viewBox="0 0 22 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="fill-current text-gray-400"
+                >
+                    <path
+                        d="M10.6562 23.25C4.76953 23.25 0 18.0469 0 11.625C0 5.20312 4.76953 0 10.6562 0C16.543 0 21.3125 5.20312 21.3125 11.625C21.3125 18.0469 16.543 23.25 10.6562 23.25ZM11.898 16.5187L8.65391 13.125H16.5C17.0715 13.125 17.5312 12.6234 17.5312 12V11.25C17.5312 10.6266 17.0715 10.125 16.5 10.125H8.65391L11.898 6.73125C12.3148 6.29531 12.3234 5.56875 11.9152 5.12344L11.4426 4.6125C11.0387 4.17188 10.3855 4.17188 9.98594 4.6125L4.28398 10.8281C3.88008 11.2687 3.88008 11.9812 4.28398 12.4172L9.98594 18.6375C10.3898 19.0781 11.043 19.0781 11.4426 18.6375L11.9152 18.1266C12.3234 17.6813 12.3148 16.9547 11.898 16.5187Z"
+                        fill="currentColor"
+                    />
+                </svg>
+            </span>
+            <span class="bg-gray-700 text-gray-400 py-3 px-3 rounded-r"
+                >Return to Inbox</span
+            >
+        </a>
+        <a href="/login" class="flex bg-gray-700 rounded">
+            <span class="text-gray-400 py-3 px-3"> Logout </span>
+            <span class="bg-gray-900 py-3 px-3 rounded-r">
+                <svg
+                    width="21"
+                    height="19"
+                    viewBox="0 0 21 19"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="fill-current text-gray-400"
+                >
+                    <path
+                        d="M21.3555 9.79787L14.1367 17.6729C13.4922 18.376 12.375 17.8838 12.375 16.876V12.376H6.53125C5.95977 12.376 5.5 11.8744 5.5 11.251V6.751C5.5 6.12756 5.95977 5.626 6.53125 5.626H12.375V1.126C12.375 0.122872 13.4879 -0.374003 14.1367 0.329122L21.3555 8.20412C21.7551 8.64475 21.7551 9.35725 21.3555 9.79787ZM8.25 17.4385V15.5635C8.25 15.2541 8.01797 15.001 7.73438 15.001H4.125C3.36445 15.001 2.75 14.3307 2.75 13.501V4.501C2.75 3.67131 3.36445 3.001 4.125 3.001H7.73438C8.01797 3.001 8.25 2.74787 8.25 2.4385V0.563497C8.25 0.254122 8.01797 0.000996965 7.73438 0.000996965H4.125C1.84766 0.000996965 0 2.01662 0 4.501V13.501C0 15.9854 1.84766 18.001 4.125 18.001H7.73438C8.01797 18.001 8.25 17.7479 8.25 17.4385Z"
+                        fill="currentColor"
+                    />
+                </svg>
+            </span>
+        </a>
+    </header>
+    <section class="bg-gray-700 my-5 p-3 rounded">
+        <h1 class="text-2xl text-gray-300 bg-gray-600 px-3 inline rounded-full">
+            {{ mail.subject }}
+        </h1>
+        <br />
+        <p
+            class="bg-gray-600 px-3 rounded-full inline-block my-2 text-gray-400"
+        >
+            {{ mail.from.text }}
+        </p>
+        <br />
+        <p class="bg-gray-600 px-3 rounded-full inline-block text-gray-400">
+            {{ mail.date | date }}
+        </p>
+    </section>
+    {% if mail.html %}
+    <div class="bg-gray-700 p-3 rounded">
+        {{ mail.html | sanitizeHtml | raw }}
+    </div>
+    {% elseif mail.textAsHtml %}
+    <div class="bg-gray-700 p-3 rounded">
+        {{ mail.textAsHtml | sanitizeHtml | raw }}
+    </div>
+    {% else %}
+    <div class="bg-gray-700 p-3 rounded"></div>
+    {% endif %}
+</div>
+
+{% endblock %}
