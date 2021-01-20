@@ -59,11 +59,11 @@
         </p>
     </section>
     {% if mail.html %}
-    <div class="bg-gray-700 p-3 rounded">
+    <div class="bg-gray-700 p-3 rounded text-gray-400">
         {{ mail.html | sanitizeHtml | raw }}
     </div>
     {% elseif mail.textAsHtml %}
-    <div class="bg-gray-700 p-3 rounded">
+    <div class="bg-gray-700 p-3 rounded text-gray-400">
         {{ mail.textAsHtml | sanitizeHtml | raw }}
     </div>
     {% else %}
