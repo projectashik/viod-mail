@@ -1,14 +1,14 @@
 # Heroku
 
 ## 1-click install
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/synox/void-mail)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/projectashik/viod-mail)
 
 ## Manual installation
 
 Install [Heroku CLI](https://devcenter.heroku.com/articles/getting-started-with-nodejs?singlepage=true#set-up)
 
 ```
-git clone https://github.com/synox/void-mail.git && cd void-mail
+git clone https://github.com/projectashik/viod-mail.git && cd void-mail
 heroku login
 heroku create
 git push heroku master
@@ -23,7 +23,7 @@ heroku open
 Requires [Node.js 10](https://nodejs.org).
 
 
-    git clone https://github.com/synox/void-mail.git
+    git clone https://github.com/projectashik/viod-mail.git
     cd void-mail
     npm install
     export DOMAIN=example.com 
@@ -59,7 +59,7 @@ pm2 --name email start npm -- start --watch
 1. clone this repository
 
 ```
-git clone https://github.com/synox/void-mail.git
+git clone https://github.com/projectashik/viod-mail.git
 ```
 
 2. change docker-compose.yml accordingly to your needs
