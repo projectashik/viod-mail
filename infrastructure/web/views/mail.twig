@@ -2,6 +2,11 @@
 <script>
     enableNewMessageNotifications("{{ address }}", false);
 </script>
+<style>
+    .mail-body a {
+        color: #3b82f6;
+    }
+</style>
 <div class="md:w-2/3 mx-auto">
     <header class="flex justify-between">
         <a href="/{{ address }}" class="flex flex-row">
@@ -59,15 +64,15 @@
         </p>
     </section>
     {% if mail.html %}
-    <div class="bg-gray-700 p-3 rounded text-gray-400">
+    <div class="bg-gray-700 p-3 rounded text-gray-400 mail-body">
         {{ mail.html | sanitizeHtml | raw }}
     </div>
     {% elseif mail.textAsHtml %}
-    <div class="bg-gray-700 p-3 rounded text-gray-400">
+    <div class="bg-gray-700 p-3 rounded text-gray-400 mail-body">
         {{ mail.textAsHtml | sanitizeHtml | raw }}
     </div>
     {% else %}
-    <div class="bg-gray-700 p-3 rounded"></div>
+    <div class="bg-gray-700 p-3 rounded mail-body"></div>
     {% endif %}
 </div>
 
